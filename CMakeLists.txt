@@ -15,5 +15,8 @@ include_directories(${PROJECT_SOURCE_DIR}/example)
 # 设置项目库文件搜索路径
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
+# src包含了mprpc框架所有的相关代码
 add_subdirectory(src)
+
+# example包含了mprpc框架使用的实例代码
 add_subdirectory(example)
