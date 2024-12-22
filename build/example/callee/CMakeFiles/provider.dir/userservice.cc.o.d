@@ -250,4 +250,5 @@ example/callee/CMakeFiles/provider.dir/userservice.cc.o: \
  /usr/local/include/google/protobuf/extension_set.h \
  /usr/include/c++/7/cassert /usr/local/include/google/protobuf/service.h \
  /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/include/mprpcapplication.h \
+ /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/include/mprpcconfig.h \
  /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/include/rpcprovider.h

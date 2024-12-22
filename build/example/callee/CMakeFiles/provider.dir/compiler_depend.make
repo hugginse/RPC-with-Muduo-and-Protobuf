@@ -623,6 +623,7 @@ example/callee/CMakeFiles/provider.dir/userservice.cc.o: ../example/callee/users
   /usr/include/c++/7/cassert \
   /usr/local/include/google/protobuf/service.h \
   ../src/include/mprpcapplication.h \
+  ../src/include/mprpcconfig.h \
   ../src/include/rpcprovider.h
 
 
@@ -1157,6 +1158,8 @@ example/callee/CMakeFiles/provider.dir/userservice.cc.o: ../example/callee/users
 /usr/include/c++/7/ext/type_traits.h:
 
 /usr/include/c++/7/bits/basic_string.tcc:
+
+../src/include/mprpcconfig.h:
 
 /usr/include/c++/7/bits/char_traits.h:
 

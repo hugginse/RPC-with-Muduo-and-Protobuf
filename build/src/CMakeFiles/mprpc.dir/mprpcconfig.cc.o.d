@@ -1,7 +1,6 @@
-src/CMakeFiles/mprpc.dir/mprpcapplication.cc.o: \
- /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/mprpcapplication.cc \
+src/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: \
+ /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/mprpcconfig.cc \
  /usr/include/stdc-predef.h \
- /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/include/mprpcapplication.h \
  /home/huggins/code/RPC-with-Moduo-and-Protobuf/src/include/mprpcconfig.h \
  /usr/include/c++/7/unordered_map /usr/include/c++/7/utility \
  /usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h \
@@ -142,9 +141,4 @@ src/CMakeFiles/mprpc.dir/mprpcapplication.cc.o: \
  /usr/include/c++/7/bits/locale_facets.tcc \
  /usr/include/c++/7/bits/basic_ios.tcc \
  /usr/include/c++/7/bits/ostream.tcc /usr/include/c++/7/istream \
- /usr/include/c++/7/bits/istream.tcc /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h
+ /usr/include/c++/7/bits/istream.tcc
