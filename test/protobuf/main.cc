@@ -5,6 +5,40 @@ using namespace fixbug;
 
 int main()
 {
+    // 列表的使用
+    /*
+    LoginResponse rsp;
+    ResultCode* rc = rsp.mutable_result();
+    rc->set_errcode(0);
+    rc->set_errmsg("登录处理失败了");
+    */
+
+    GetFriendListsResponse rsp;
+    ResultCode* rc = rsp.mutable_result();
+    rc->set_errcode(0);
+
+    User* user1 = rsp.add_friend_list();
+    user1->set_name("zhang san");
+    user1->set_age(20);
+    user1->set_sex(User::MAN);
+
+    User* user2 = rsp.add_friend_list();
+    user2->set_name("li si");
+    user2->set_age(20);
+    user2->set_sex(User::MAN);
+
+    std::cout << rsp.friend_list_size() << std::endl;
+
+    
+
+    return 0;
+}
+
+
+// 序列化与反序列化 string版本
+#if 0
+int main()
+{
     // 封装了login请求对象的数据
     LoginRequest req;
     req.set_name("zhang san");
@@ -28,3 +62,4 @@ int main()
 
     return 0;
 }
+#endif
