@@ -7,21 +7,21 @@
 /*
 UserService原来是一个本地服务，提供了两个进程内的本地方法，Login和GetFriendLists
 */
-class UserService : public fixbug::UserServiceRpc   // 使用再rpc服务发布端（RPC服务提供者）
+class UserService : public fixbug::UserServiceRpc   // 使用再RPC服务发布端（RPC服务提供者）
 {
 public:
     bool Login(std::string name, std::string pwd)
     {
         std::cout << "doing local service: Login" << std::endl;
-        std::cout << "name: " << name << " pwd: " << std::endl;
-        return false;
+        std::cout << "name: " << name << " pwd: " << pwd << std::endl;
+        return true;
     }
 
     bool Register(uint32_t id, std::string name, std::string pwd)
     {
         std::cout << "doing local service: Register" << std::endl;
-        std::cout << "id: " << id << "name: " << name << " pwd: " << std::endl;
-        return false;
+        std::cout << "id: " << id << "name: " << name << " pwd: " << pwd << std::endl;
+        return true;
     }
     
     /*
@@ -35,7 +35,7 @@ public:
                        ::fixbug::LoginResponse* response,
                        ::google::protobuf::Closure* done)
     {
-        // 框架给业务上报了请求参数LoginRequest，业务取出相应数据做本地业务
+        // 框架给业务上报了请求参数LoginRequest，应用取出相应数据做本地业务
         std::string name = request->name();
         std::string pwd = request->pwd();
 

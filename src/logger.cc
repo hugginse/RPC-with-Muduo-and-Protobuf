@@ -15,7 +15,7 @@ Logger::Logger()
     std::thread writeLogTask([&](){
         for (;;)
         {
-            // 获取当天的日期，然后取日志信息，写入响应的日志文件当中 a+
+            // 获取当天的日期，然后取日志信息，写入相应的日志文件当中 a+
             time_t now = time(nullptr);
             tm* nowtm = localtime(&now);
 

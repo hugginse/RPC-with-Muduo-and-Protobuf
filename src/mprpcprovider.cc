@@ -157,7 +157,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
     std::cout << "args_str: " << args_str << std::endl;
     std::cout << "==========================" << std::endl;
 
-    // 获取service对象喝method对象
+    // 获取service对象和method对象
     auto it = m_serviceMap.find(service_name);
     if (it == m_serviceMap.end())
     {
@@ -212,7 +212,7 @@ void RpcProvider::sendRpcResponse(const muduo::net::TcpConnectionPtr &conn, goog
     {
         // 序列化成功后，通过网络把rpc方法执行的结果发送给rpc的调用方
         conn->send(response_str);
-        conn->shutdown();       // 模拟http的短链接服务，由rpcprovider主动断开连接
+        //conn->shutdown();       // 模拟http的短链接服务，由rpcprovider主动断开连接
     }
     else
     {

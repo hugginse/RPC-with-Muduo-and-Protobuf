@@ -3,13 +3,13 @@
 MprpcController::MprpcController()
 {
     m_failed = false;
-    m_errTest = "";
+    m_errText = "";
 }
 
 void MprpcController::Reset()
 {
     m_failed = false;
-    m_errTest = "";
+    m_errText = "";
 }
 
 bool MprpcController::Failed() const
@@ -19,13 +19,13 @@ bool MprpcController::Failed() const
 
 std::string MprpcController::ErrorText() const
 {
-    return m_errTest;
+    return m_errText;
 }
 
 void MprpcController::SetFailed(const std::string& reason)
 {
     m_failed = true;
-    m_errTest = reason;
+    m_errText = reason;
 }
 
 // 目前未实现功能

@@ -9,7 +9,7 @@ void global_watcher(zhandle_t* zh, int type,
 {
     if (type == ZOO_SESSION_EVENT)  // 回调的消息类型和会话相关的消息类型
     {
-        if (state == ZOO_CONNECTED_STATE)
+        if (state == ZOO_CONNECTED_STATE)   // zkClient和zkServer连接成功
         {
             sem_t* sem = (sem_t*)zoo_get_context(zh);
             sem_post(sem);

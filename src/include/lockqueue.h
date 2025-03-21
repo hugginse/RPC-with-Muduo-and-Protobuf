@@ -3,7 +3,7 @@
 
 #include <queue>
 #include <thread>
-#include <mutex>        // pthread_mutex_t
+#include <mutex>                    // pthread_mutex_t
 #include <condition_variable>       // pthread_condition_t
 
 // 异步写日志的日志队列

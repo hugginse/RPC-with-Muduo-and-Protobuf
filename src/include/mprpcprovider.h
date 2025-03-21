@@ -5,10 +5,10 @@
 #include <muduo/net/InetAddress.h>
 #include <muduo/net/TcpConnection.h>
 #include <string>
-#include "mprpcapplication.h"
 #include <functional>
 #include <unordered_map>
 
+#include "mprpcapplication.h"
 #include "google/protobuf/service.h"
 // 框架提供的专门服务发布rpc服务的网络对象
 class RpcProvider
@@ -23,7 +23,7 @@ private:
     // 组合EventLoop
     muduo::net::EventLoop m_eventLoop;
 
-    // 服务类型信息
+    // service服务类型信息
     struct ServiceInfo
     {
         google::protobuf::Service* m_service;       // 保存服务对象
