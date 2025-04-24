@@ -1,4 +1,0 @@
-11:50:48 => [info] service_name: FriendServiceRpc
-11:50:48 => [info] method_name: GetFriendsList
-12:47:45 => [info] service_name: FriendServiceRpc
-12:47:45 => [info] method_name: GetFriendsList
