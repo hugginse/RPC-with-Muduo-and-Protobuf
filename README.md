@@ -1,86 +1,106 @@
 # PRC with Protobuf and Muduo
 
-## 技术栈
+## 项目介绍
+本项目设计并实现了一种分布式RPC框架，该框架使用`protobuf`作为数据的序列化/反序列化工具、`zookeeper`作为服务的配置中心以及[`Muduo`](https://github.com/chenshuo/muduo)网络库作为网络通信模块。该框架支持分布式环境下本地服务的注册、发布于远程调用，其核心目标是作为个人学习理解RPC原理，实现高并发网络编程于分布是协调技术。
 
-* 集群和分布式概念及原理
+## 项目编译
 
-* RPC远程过程调用原理及实现
-
-* Protobuf数据序列化和反序列化协议
-
-* Zookeeper分布式一致性协调服务应用以及编程
-
-* Muduo网络库编程
-
-* conf配置文件读取
-
-* CMake构建项目集成编译环境
-
-* github项目管理
-
-
-## 集群和分布式
-
-**集群：**每一个服务器独立运行一个工程的所有模块
-
-**分布式：**一个工程拆分成多个模块，每个模块独立部署在一个服务器上，所有服务器协同工作共同提供服务，每一台服务器称作分布式的一个**节点**，根据节点的并发要求，对一个节点可以再做节点模块集群部署
-
-## RPC通信原理
-
-RPC(Remote Procedure Call Protocol)远程过程调用协议
-
-
-## 环境配置使用
-
-### 项目代码工程目录
-
-bin：可执行文件
-
-build：项目编译文件
-
-lib：项目库文件
-
-src：项目源文件
-
-test：测试代码
-
-example：框架代码使用范例
-
-CMakeList.txt：顶层的cmake文件
-
-README.md：项目自述文件
-
-autobuild.sh：一键编译脚本
-
-### 网络I/O模型介绍
-
-### Protobuf
-
-**Protobuf**是google开发的一种独立于平台语言数据交换的格式，其提供了java、c#、c++、go和python等语言的实现，并包含了相应语言的编译器以及库文件
-
-由于它是一种**二进制**的格式，效率上比xml(20倍)、json(10倍)高，可以把它应用于分布式应用之间的数据通信或者异构环境下的数据交换。作为一种效率和兼容性都很优秀的二进制数据传输格式，可用于诸如网络传输、配置文件、数据存储等诸多领域
-
-**要求：熟悉Protubu的proto配置文件内容，以及protoc的编译命令**
-```proto
-syntax = "proto3";      // 声明了protobuf版本
-
-package xxx;    // 声明了代码所在的包(对应c++来说是namespace)
-
-option cc_generic_services = true;
-
+下载项目
+```shell
+git clone https://github.com/hugginse/RPC-with-Muduo-and-Protobuf
 ```
 
+进入RPC-with-Muduo-and-Protubuf文件夹
+```bash
+cd RPC-with-Muduo-and-Protubuf/
 ```
-protoc test.proto --cpp_out=./
+
+一键编译安装
+```bash
+sudo ./autobuild.sh
 ```
 
-**<font color = 'red'>Tips:</font>**
-> 在使用string时可以直接使用**bytes**类型代替，提升效率
+## 案例运行
+
+### 开启zookeeper服务
+
+1. 设置`zookeeper配置文件`，当前路径处于zookeeper文件夹下，进入`conf`文件夹建立`zoo.cfg`配置文件
+```bash
+cd conf/
+cp zoo_sample.cfg zoo.cfg
+```
+
+2. 修改`zoo.cfg`文件的`dataDir`（根据自己需求修改，默认的`/tmp/zookeeper`在每次关闭之后不保留节点信息）
+```bash
+vi zoo.cfg
+#dataDir=/tmp/zookeeper
+dataDir=/home/*userName/zookeeper/data
+```
+
+3. 进入`/bin`文件夹开启zookeeper服务
+```bash
+cd /bin
+./zkServer.sh start
+```
+
+出现如下提示，表示zookeeper服务开启成功
+```bash
+Zookeeper JMX enabled by default
+Using config:/home/xxx/xxx/zookeeper/bin/.../conf/zoo.cfg
+Starting zookeeper ... already running as process xxx.
+```
+或者通过`sudo netstat -tanp`命令查看`2181`端口是否正常工作
+
+### 运行example
+
+1. 进入`RPC-with_Muduo-and-Protobuf/bin`文件夹，开启`provider`RPC服务
+```bash
+cd bin/
+./provider -i test.conf
+```
+运行示例
+![](./images/provider.jpg)
+
+2. 使用`consumer`RPC服务
+```bash
+./consumer -i test.conf
+```
+运行示例
+![](./images/consumer.jpg)
+
+进入RPC-with-Muduo-and-Protobuf文件夹
 
 
-## MPRPC框架设计
+## RPC框架设计
 
- 
-## Zookeeper分布式协调服务
+### 概念
 
-**znode节点存储格式**
+1. RPC(Remote Procedure Call Ptotocol)远程过程调用协议
+
+2. RPC是一种通过网络(RPC框架解耦了网络代码和业务代码)从远程主机的程序上请求服务
+
+3. RPC主要作用就是同的服务方法调用就像本地方法调用一样便捷
+
+### RPC通信原理
+
+![](./images/RpcDefination.png)
+
+* 黄色部分：设计RPC方法参数的打包和解析，即数据的序列化和反序列化
+
+* 绿色部分：网络部分，包括寻找RPC服务主机，发起RPC调用请求和响应RPC调用结果。
+
+### RPC优势
+
+1. 简化分布式通信：RPC框架封装了底层的网络通信细节，简化了分布式通信的复杂性，给开发人员提供简便的调用远程服务（可以像调用本地方法一样）
+
+2. 跨语言支持：RPC框架提供了跨语言的能力，使基于不同语言架构下的应用程序可以进行交互。
+
+3. 性能：RPC使用更加高效的传输协议和序列化方法，减少了通信的开销
+
+### RPC使用场景
+
+1. 大型网站：内部涉及多个子系统，如：（订单系统、支付系统、商品系统、用户系统...等组成的系统），每个子系统可单独部署
+
+2. 接口访问量大：RPC基于长连接，要求满足支持”负载均衡”，“熔断降级”一类面向服务的高级特性
+
+3. 微服务化治理：微服务架构、分布式架构
